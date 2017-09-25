@@ -1,0 +1,12 @@
+spring:
+    profiles:
+      active: prod
+    datasource:
+      driver-class-name : com.mysql.jdbc.Driver
+      url: jdbc:mysql://qdm107498593.my3w.com/qdm107498593_db?characterEncoding=utf-8&useSSL=false
+      username: qdm107498593
+      password: zhwZHW0123456789
+    jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
