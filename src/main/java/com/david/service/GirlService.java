@@ -1,6 +1,8 @@
 package com.david.service;
 
 import com.david.domain.Girl;
+import com.david.enums.ResultEnum;
+import com.david.exception.GirlException;
 import com.david.reponsitory.GirlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +33,16 @@ public class GirlService {
         girlB.setCupSize("BB");
         girlB.setAge(19);
         girlRepository.save(girlB);
+    }
+
+    public Girl getAge(Integer id) throws Exception {
+        Girl girl = girlRepository.findOne(id);
+        Integer age = girl.getAge();
+        if(age  < 10){
+            throw new GirlException(ResultEnum.PRIMARY_SCHOOl);
+        }else if(age > 10 && age < 16){
+            throw new GirlException(ResultEnum.MIDDLE_SCHOOl);
+        }
+        return girl;
     }
 }
