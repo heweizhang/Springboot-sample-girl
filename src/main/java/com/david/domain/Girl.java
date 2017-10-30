@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 /**
@@ -24,7 +25,8 @@ public class Girl {
 
     private String cupSize;
 
-    @Min(value = 18 ,message = "年龄小于18")
+    @Min(value = 18, message = "年龄小于18")
+    @Max(value = 20, message = "年龄大于20")
     private Integer age;
 
 

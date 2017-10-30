@@ -3,6 +3,8 @@ package com.david.controller;
 import com.david.domain.Girl;
 import com.david.reponsitory.GirlRepository;
 import com.david.service.GirlService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,8 @@ import java.util.List;
  */
 @RestController
 public class GirlController {
+    private final static Logger logger =  LoggerFactory.getLogger(GirlController.class);
+
 
     @Autowired
     private GirlRepository girlRepository;
@@ -38,13 +42,10 @@ public class GirlController {
     @PostMapping(value = "/girls")
     public Girl girlAdd(@Valid Girl girl, BindingResult bindingResult) {
         if(bindingResult.hasErrors()){
-            System.out.print(bindingResult.getFieldError().getDefaultMessage());
+            logger.error(bindingResult.getFieldError().getDefaultMessage());
             return null;
         }
-        Girl girl1 = new Girl();
-        girl1.setAge(girl.getAge());
-        girl1.setCupSize(girl.getCupSize());
-        return girlRepository.save(girl1);
+        return girlRepository.save(girl);
     }
 
     /**
